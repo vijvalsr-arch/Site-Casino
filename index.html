@@ -1,66 +1,180 @@
 <!DOCTYPE html>
+
 <html>
 <head>
     <title>Honor Miner</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background: white;
-            color: black;
-        }
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        .owner {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            color: blue;
-            font-weight: bold;
-        }
+```
+<style>
+    body{
+        font-family: Arial, sans-serif;
+        text-align:center;
+        margin:0;
+        padding:20px;
+        background:white;
+        color:black;
+    }
 
-        body.dark {
-            background: #121212;
-            color: white;
-        }
+    body.dark{
+        background:#121212;
+        color:white;
+    }
 
-        body.dark .owner {
-            left: 10px;
-            right: auto;
-            color: yellow;
-        }
+    #owner{
+        position:fixed;
+        top:10px;
+        right:10px;
+        color:blue;
+        font-weight:bold;
+    }
 
-        button {
-            padding: 10px;
-            margin: 10px;
-        }
-    </style>
+    body.dark #owner{
+        left:10px;
+        right:auto;
+        color:yellow;
+    }
+
+    h1{
+        margin-top:80px;
+        font-size:50px;
+    }
+
+    .box{
+        max-width:600px;
+        margin:auto;
+        padding:20px;
+        border:2px solid gray;
+        border-radius:10px;
+    }
+
+    button{
+        padding:10px 20px;
+        margin:5px;
+        cursor:pointer;
+    }
+
+    input{
+        padding:10px;
+        width:250px;
+    }
+
+    .warning{
+        font-size:24px;
+        font-weight:bold;
+        color:red;
+        margin-bottom:20px;
+    }
+</style>
+```
+
 </head>
+
 <body>
 
-<div class="owner">Owned by Freeism Party</div>
+<div id="owner">Owned by Freeism Party</div>
 
 <h1>Solve, Gain, Gamble</h1>
 
-<input id="code" placeholder="Enter Honor Code">
+<div class="box">
+
+```
+<div class="warning">
+    ⚠️ ENTER YOUR FULL NAME ⚠️<br>
+    ⚠️ CAPITALIZE THE FIRST LETTER OF BOTH NAMES ⚠️
+</div>
+
+<input id="fullname" placeholder="Full Name">
 
 <br><br>
 
-<button onclick="login()">Login</button>
+<button onclick="createAccount()">Create Account</button>
 
 <button onclick="toggleTheme()">Toggle Theme</button>
+```
+
+</div>
 
 <script>
-function login() {
-    const code = document.getElementById("code").value;
 
-    if(code.length > 0){
-        alert("Login system coming soon!");
+const elders = [
+"Zach Greer",
+"Lucas Breaux",
+"Ethan Hendrickson",
+"Harrison Magner",
+"Vijval Satheesh Kumar",
+"Desmond Phillips"
+];
+
+function generateCode(){
+
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const numbers = "0123456789";
+    const specials = ["<","#","@","&","*"];
+
+    let code = "";
+
+    for(let i=0;i<3;i++){
+        code += letters[Math.floor(Math.random()*letters.length)];
     }
+
+    code += numbers[Math.floor(Math.random()*10)];
+    code += specials[Math.floor(Math.random()*specials.length)];
+    code += numbers[Math.floor(Math.random()*10)];
+
+    return code;
+}
+
+function createAccount(){
+
+    const name =
+        document.getElementById("fullname").value.trim();
+
+    if(name === ""){
+        alert("Enter your full name.");
+        return;
+    }
+
+    let code = generateCode();
+
+    if(elders.includes(name)){
+
+        code = "F$R" + code;
+
+        alert(
+`Congrats! You have been admissioned as a Site Elder who plays a major role in the Site by the Freeism Party. Therefore, you have some perks!
+
+Permanent VIP
+Unlimited Mining
+Unlimited Casino Time
+Community Pool Earnings
+
+F$R = Freeism Profit Recipient
+
+Your Elder Code:
+
+${code}`
+        );
+
+    }else{
+
+        alert(
+`Your Honor Code:
+
+${code}
+
+SAVE THIS CODE.
+IT IS YOUR LOGIN.`
+        );
+
+    }
+
 }
 
 function toggleTheme(){
     document.body.classList.toggle("dark");
 }
+
 </script>
 
 </body>
