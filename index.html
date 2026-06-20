@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Honor Miner</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: white;
+            color: black;
+        }
+
+        .owner {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            color: blue;
+            font-weight: bold;
+        }
+
+        body.dark {
+            background: #121212;
+            color: white;
+        }
+
+        body.dark .owner {
+            left: 10px;
+            right: auto;
+            color: yellow;
+        }
+
+        button {
+            padding: 10px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="owner">Owned by Freeism Party</div>
+
+<h1>Solve, Gain, Gamble</h1>
+
+<input id="code" placeholder="Enter Honor Code">
+
+<br><br>
+
+<button onclick="login()">Login</button>
+
+<button onclick="toggleTheme()">Toggle Theme</button>
+
+<script>
+function login() {
+    const code = document.getElementById("code").value;
+
+    if(code.length > 0){
+        alert("Login system coming soon!");
+    }
+}
+
+function toggleTheme(){
+    document.body.classList.toggle("dark");
+}
+</script>
+
+</body>
+</html>
