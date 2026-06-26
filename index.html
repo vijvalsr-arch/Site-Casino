@@ -1,71 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Site Lobby</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        body {
-            font-family: "Bodoni MT", "Didot", serif;
-            background-color: #121010;
-            color: white;
-            margin: 5;
-            padding: 20px;
-            text-align: center;
-            
-        }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
-        h1 {
-            font-family: "Bodoni MT", "Didot", serif;
-            font-style: normal;
-            font-size: 48px;
-            margin-top: 100px;
-            margin-bottom: 10px;
-        }
+<title>Solve • Gain • Gamble</title>
 
-        .courgette {
-            font-family: "Inter", sans-serif;
-            font-size: 28px;
-            margin-bottom: 40px;
-        }
+<style>
 
-        button {
-            font-family: "Century", serif;
-            background-color: #555555;
-            color: gray;
-            border: none;
-            padding: 15px 24px;
-            font-size: 20px;
-            cursor: pointer;
-            border-radius: 6px;
-        }
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Inter',sans-serif;
+}
 
-        button:hover {
-            background-color: #666666;
-        }
-    </style>
+body{
+
+background:#000;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+color:white;
+
+}
+
+/* Background Glow */
+
+body::before{
+
+content:"";
+position:absolute;
+width:700px;
+height:700px;
+
+background:radial-gradient(circle,
+rgba(255,255,255,.08) 0%,
+rgba(255,255,255,.03) 30%,
+transparent 70%);
+
+filter:blur(25px);
+
+z-index:0;
+
+}
+
+/* Main Container */
+
+.container{
+
+position:relative;
+z-index:1;
+
+width:90%;
+max-width:850px;
+
+padding:70px;
+
+text-align:center;
+
+border:1px solid rgba(255,255,255,.15);
+
+border-radius:25px;
+
+background:rgba(15,15,15,.88);
+
+backdrop-filter:blur(18px);
+
+box-shadow:
+
+0 0 18px rgba(255,255,255,.08),
+0 0 60px rgba(255,255,255,.04),
+inset 0 0 25px rgba(255,255,255,.04);
+
+animation:float 5s ease-in-out infinite;
+
+}
+
+/* White Outline */
+
+.container::after{
+
+content:"";
+
+position:absolute;
+
+top:-10px;
+left:-10px;
+right:-10px;
+bottom:-10px;
+
+border:1px solid rgba(255,255,255,.07);
+
+border-radius:32px;
+
+pointer-events:none;
+
+}
+
+/* Title */
+
+h1{
+
+font-size:60px;
+font-weight:800;
+
+letter-spacing:-2px;
+
+text-shadow:
+0 0 15px rgba(255,255,255,.18);
+
+margin-bottom:18px;
+
+}
+
+/* Subtitle */
+
+.subtitle{
+
+font-size:20px;
+
+font-weight:300;
+
+opacity:.75;
+
+margin-bottom:50px;
+
+}
+
+/* Buttons */
+
+.buttons{
+
+display:flex;
+
+justify-content:center;
+
+gap:22px;
+
+flex-wrap:wrap;
+
+}
+
+button{
+
+background:#111;
+
+color:white;
+
+border:1px solid rgba(255,255,255,.12);
+
+padding:18px 42px;
+
+font-size:17px;
+
+border-radius:14px;
+
+cursor:pointer;
+
+transition:.35s;
+
+font-weight:600;
+
+letter-spacing:.5px;
+
+}
+
+button:hover{
+
+background:#2a2a2a;
+
+border-color:white;
+
+transform:translateY(-4px);
+
+box-shadow:
+
+0 0 15px rgba(255,255,255,.12);
+
+}
+
+button:active{
+
+transform:scale(.98);
+
+}
+
+/* Floating */
+
+@keyframes float{
+
+0%{transform:translateY(0px);}
+50%{transform:translateY(-8px);}
+100%{transform:translateY(0px);}
+
+}
+
+</style>
+
 </head>
+
 <body>
 
-    <h1>Welcome to Site Lobby</h1>
+<div class="container">
 
-    <p class="courgette">
-        Brought to you by Vijval 
-    </p>
+<h1>Solve • Gain • Gamble</h1>
 
-    <button>Enter</button>
-
-    <div class="frame">
-    <h1>Welcome to Site Lobby</h1>
-
-    <p class="courgette">
-        Brought to you by Vijval
-    </p>
-
-    <button>Start</button>
+<div class="subtitle">
+Earn Honor through knowledge. Test your luck.
 </div>
 
+<div class="buttons">
+
+<button>Start</button>
+
+<button>Enter Code</button>
+
+</div>
+
+</div>
 
 </body>
 </html>
