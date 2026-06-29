@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Site Login</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Inter',sans-serif;
+}
+
+body{
+height:100vh;
+background:#000;
+display:flex;
+justify-content:center;
+align-items:center;
+color:white;
+overflow:hidden;
+}
+
+/* lighting */
+body::before{
+content:"";
+position:absolute;
+width:800px;
+height:800px;
+background:radial-gradient(circle,
+rgba(255,255,255,0.08),
+rgba(255,255,255,0.03),
+transparent 70%);
+filter:blur(30px);
+}
+
+/* main container */
+.container{
+position:relative;
+z-index:2;
+width:90%;
+max-width:900px;
+display:flex;
+border:1px solid rgba(255,255,255,0.12);
+border-radius:20px;
+background:rgba(15,15,15,0.85);
+backdrop-filter:blur(15px);
+overflow:hidden;
+}
+
+/* divider */
+.divider{
+width:1px;
+background:rgba(255,255,255,0.1);
+box-shadow:0 0 10px rgba(255,255,255,0.15);
+}
+
+/* panels */
+.panel{
+flex:1;
+padding:50px;
+text-align:center;
+}
+
+h2{
+margin-bottom:20px;
+font-size:28px;
+}
+
+p{
+opacity:0.7;
+font-size:14px;
+margin-bottom:25px;
+}
+
+/* inputs */
+input{
+width:80%;
+padding:14px;
+margin:10px 0;
+border-radius:10px;
+border:1px solid rgba(255,255,255,0.15);
+background:#111;
+color:white;
+outline:none;
+text-align:center;
+}
+
+input:focus{
+border-color:white;
+}
+
+/* buttons */
+button{
+margin-top:15px;
+padding:14px 30px;
+border-radius:10px;
+border:1px solid rgba(255,255,255,0.15);
+background:#111;
+color:white;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+background:#2a2a2a;
+transform:translateY(-3px);
+}
+
+/* bottom back */
+.back{
+position:absolute;
+bottom:20px;
+width:100%;
+text-align:center;
+font-size:14px;
+opacity:0.5;
+cursor:pointer;
+}
+
+.back:hover{
+opacity:1;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- SIGN UP -->
+    <div class="panel">
+        <h2>Sign Up</h2>
+        <p>Create your Site Miner code</p>
+
+        <input type="password" id="newCode" placeholder="Create code"
+               autocomplete="new-password">
+
+        <button onclick="signup()">Sign Up</button>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- LOGIN -->
+    <div class="panel">
+        <h2>Log In</h2>
+        <p>Enter your existing code</p>
+
+        <input type="password" id="loginCode" placeholder="Enter code"
+               autocomplete="current-password">
+
+        <button onclick="login()">Log In</button>
+    </div>
+
+</div>
+
+<div class="back" onclick="window.location.href='index.html'">
+← Back to Lobby
+</div>
+
+<script>
+
+function signup(){
+const code = document.getElementById("newCode").value;
+if(!code) return alert("Enter a code");
+
+localStorage.setItem("siteCode", code);
+
+alert("Code saved!");
+}
+
+function login(){
+const code = document.getElementById("loginCode").value;
+const saved = localStorage.getItem("siteCode");
+
+if(code === saved){
+alert("Welcome back!");
+window.location.href = "miner.html";
+}else{
+alert("Wrong code");
+}
+}
+
+</script>
+
+</body>
+</html>
