@@ -1,14 +1,18 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Solve. Earn. Gamble.</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
-<title>Solve • Gain • Gamble</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 
@@ -23,10 +27,13 @@ body{
 
 background:#000;
 height:100vh;
+
 display:flex;
 justify-content:center;
 align-items:center;
+
 overflow:hidden;
+
 color:white;
 
 }
@@ -36,13 +43,15 @@ color:white;
 body::before{
 
 content:"";
+
 position:absolute;
+
 width:700px;
 height:700px;
 
 background:radial-gradient(circle,
 rgba(255,255,255,.08) 0%,
-rgba(255,255,255,.03) 30%,
+rgba(255,255,255,.03) 35%,
 transparent 70%);
 
 filter:blur(25px);
@@ -51,12 +60,13 @@ z-index:0;
 
 }
 
-/* Main Container */
+/* Main Box */
 
 .container{
 
 position:relative;
-z-index:1;
+
+z-index:2;
 
 width:90%;
 max-width:850px;
@@ -65,11 +75,11 @@ padding:70px;
 
 text-align:center;
 
+background:rgba(15,15,15,.88);
+
 border:1px solid rgba(255,255,255,.15);
 
 border-radius:25px;
-
-background:rgba(15,15,15,.88);
 
 backdrop-filter:blur(18px);
 
@@ -83,7 +93,7 @@ animation:float 5s ease-in-out infinite;
 
 }
 
-/* White Outline */
+/* Outer Frame */
 
 .container::after{
 
@@ -96,7 +106,7 @@ left:-10px;
 right:-10px;
 bottom:-10px;
 
-border:1px solid rgba(255,255,255,.07);
+border:1px solid rgba(255,255,255,.08);
 
 border-radius:32px;
 
@@ -109,14 +119,16 @@ pointer-events:none;
 h1{
 
 font-size:60px;
+
 font-weight:800;
 
 letter-spacing:-2px;
 
-text-shadow:
-0 0 15px rgba(255,255,255,.18);
+margin-bottom:20px;
 
-margin-bottom:18px;
+text-shadow:
+
+0 0 15px rgba(255,255,255,.18);
 
 }
 
@@ -130,7 +142,7 @@ font-weight:300;
 
 opacity:.75;
 
-margin-bottom:50px;
+margin-bottom:55px;
 
 }
 
@@ -142,10 +154,6 @@ display:flex;
 
 justify-content:center;
 
-gap:22px;
-
-flex-wrap:wrap;
-
 }
 
 button{
@@ -156,17 +164,17 @@ color:white;
 
 border:1px solid rgba(255,255,255,.12);
 
-padding:18px 42px;
+padding:18px 46px;
 
 font-size:17px;
+
+font-weight:600;
 
 border-radius:14px;
 
 cursor:pointer;
 
 transition:.35s;
-
-font-weight:600;
 
 letter-spacing:.5px;
 
@@ -192,13 +200,47 @@ transform:scale(.98);
 
 }
 
-/* Floating */
+/* Floating Animation */
 
 @keyframes float{
 
-0%{transform:translateY(0px);}
-50%{transform:translateY(-8px);}
-100%{transform:translateY(0px);}
+0%{
+transform:translateY(0px);
+}
+
+50%{
+transform:translateY(-8px);
+}
+
+100%{
+transform:translateY(0px);
+}
+
+}
+
+/* Signature */
+
+.signature{
+
+position:absolute;
+
+bottom:28px;
+
+left:50%;
+
+transform:translateX(-50%);
+
+font-size:15px;
+
+font-weight:400;
+
+letter-spacing:.5px;
+
+color:rgba(255,255,255,.45);
+
+text-shadow:0 0 10px rgba(255,255,255,.08);
+
+user-select:none;
 
 }
 
@@ -210,7 +252,7 @@ transform:scale(.98);
 
 <div class="container">
 
-<h1>Solve • Gain • Gamble</h1>
+<h1>Solve. Earn. Gamble.</h1>
 
 <div class="subtitle">
 Welcome to the Site Lobby.
@@ -218,13 +260,19 @@ Welcome to the Site Lobby.
 
 <div class="buttons">
 
-<button>Start</button>
-
-<button>Enter Code</button>
+<button onclick="window.location.href='login.html'">
+Proceed →
+</button>
 
 </div>
 
+</div>
+
+<div class="signature">
+Vijval was here :)
 </div>
 
 </body>
+
 </html>
+```
