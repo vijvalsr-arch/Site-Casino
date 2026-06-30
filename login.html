@@ -30,6 +30,51 @@ overflow:hidden;
 
 /* lighting */
 body::before{
+    body::after{
+
+content:"";
+
+position:absolute;
+
+width:900px;
+
+height:900px;
+
+background:radial-gradient(circle,
+rgba(255,255,255,.025),
+transparent 70%);
+
+animation:pulse 6s ease-in-out infinite;
+
+}
+
+@keyframes pulse{
+
+0%{
+
+transform:scale(1);
+
+opacity:.25;
+
+}
+
+50%{
+
+transform:scale(1.08);
+
+opacity:.45;
+
+}
+
+100%{
+
+transform:scale(1);
+
+opacity:.25;
+
+}
+
+}
 content:"";
 position:absolute;
 width:800px;
@@ -57,9 +102,55 @@ overflow:hidden;
 
 /* divider */
 .divider{
-width:1px;
-background:rgba(255,255,255,0.1);
-box-shadow:0 0 10px rgba(255,255,255,0.15);
+
+position:relative;
+
+width:2px;
+
+background:rgba(255,255,255,.08);
+
+overflow:hidden;
+    .divider::before{
+
+content:"";
+
+position:absolute;
+
+left:-2px;
+
+width:6px;
+
+height:120px;
+
+background:linear-gradient(
+to bottom,
+transparent,
+white,
+transparent
+);
+
+filter:blur(4px);
+
+animation:electricFlow 3.5s linear infinite;
+
+}
+
+@keyframes electricFlow{
+
+0%{
+
+top:-120px;
+
+}
+
+100%{
+
+top:100%;
+
+}
+
+}
+
 }
 
 /* panels */
