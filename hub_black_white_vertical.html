@@ -1,0 +1,27 @@
+<!DOCTYPE html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>Hub</title><style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:#050505;color:#fff;overflow:hidden}
+.bg{position:fixed;inset:-20%;background:
+radial-gradient(circle at 20% 20%,rgba(255,255,255,.09),transparent 30%),
+radial-gradient(circle at 80% 70%,rgba(255,255,255,.06),transparent 35%),#050505;
+filter:blur(30px);animation:m 12s ease-in-out infinite alternate}
+@keyframes m{to{transform:translate(5%,4%) scale(1.1)}}
+.wrap{position:relative;height:100vh;display:grid;grid-template-columns:repeat(5,1fr)}
+.col{display:flex;flex-direction:column;justify-content:center;align-items:center;
+padding:24px;background:rgba(255,255,255,.04);backdrop-filter:blur(10px);
+border-left:1px solid rgba(255,255,255,.18);transition:.35s}
+.col:first-child{border-left:none}
+.col:hover{background:rgba(255,255,255,.08);flex:1.08}
+h2{font-size:2rem;margin-bottom:16px}
+p{opacity:.75;text-align:center;max-width:180px;line-height:1.5;margin-bottom:24px}
+button{background:#fff;color:#000;border:none;padding:12px 24px;border-radius:10px;font-weight:700;cursor:pointer}
+button:hover{transform:scale(1.05)}
+@media(max-width:900px){.wrap{grid-template-columns:1fr;grid-template-rows:repeat(5,1fr)}.col{border-left:none;border-top:1px solid rgba(255,255,255,.18)}.col:first-child{border-top:none}}
+</style></head><body><div class='bg'></div><div class='wrap'>
+<div class='col'><h2>Mine</h2><p>Solve problems and earn honors through daily challenges.</p><button>Proceed →</button></div>
+<div class='col'><h2>Gamble</h2><p>Test your luck using honors in exciting games.</p><button>Proceed →</button></div>
+<div class='col'><h2>Shop</h2><p>Purchase upgrades, cosmetics, and premium memberships.</p><button>Proceed →</button></div>
+<div class='col'><h2>Wallet</h2><p>Monitor honors, transfers, subscriptions, and transactions.</p><button>Proceed →</button></div>
+<div class='col'><h2>Hangout</h2><p>Meet members, chat, and build your community.</p><button>Proceed →</button></div>
+</div></body></html>
