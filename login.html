@@ -25,7 +25,7 @@ body {
   overflow: hidden;
 }
 
-/* subtle moving light strips */
+/* moving strip light */
 body::before {
   content: "";
   position: absolute;
@@ -39,7 +39,7 @@ body::before {
     #000 80px
   );
   animation: move 12s linear infinite;
-  opacity: 0.4;
+  opacity: 0.35;
 }
 
 @keyframes move {
@@ -53,27 +53,37 @@ body::before {
   width: 340px;
   padding: 30px;
   border: 1px solid #fff;
-  background: rgba(0,0,0,0.7);
-  backdrop-filter: blur(6px);
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(8px);
   text-align: center;
-  animation: fadeIn 1s ease;
+  animation: fadeIn 0.8s ease;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
+  from { opacity: 0; transform: translateY(15px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 h1 {
-  margin-bottom: 20px;
-  font-weight: 700;
   letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.toggle {
+  font-size: 12px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.toggle:hover {
+  opacity: 1;
 }
 
 input {
   width: 100%;
   padding: 12px;
-  margin: 10px 0;
+  margin: 8px 0;
   border: 1px solid #fff;
   background: transparent;
   color: #fff;
@@ -89,7 +99,7 @@ input:focus {
 button {
   width: 100%;
   padding: 12px;
-  margin-top: 15px;
+  margin-top: 12px;
   border: 1px solid #fff;
   background: #fff;
   color: #000;
@@ -105,7 +115,7 @@ button:hover {
   color: #fff;
 }
 
-/* ripple effect */
+/* ripple */
 .ripple {
   position: absolute;
   border-radius: 50%;
@@ -124,8 +134,8 @@ button:hover {
 small {
   display: block;
   margin-top: 12px;
-  opacity: 0.7;
-  font-size: 12px;
+  opacity: 0.6;
+  font-size: 11px;
 }
 </style>
 </head>
@@ -133,19 +143,38 @@ small {
 <body>
 
 <div class="container">
-  <h1>LOGIN</h1>
+  <h1 id="title">LOGIN</h1>
+
+  <div class="toggle" onclick="toggleMode()">
+    Switch to <span id="modeText">Sign Up</span>
+  </div>
 
   <input type="text" id="code" placeholder="Enter Code">
   <input type="password" id="pass" placeholder="Password">
 
-  <button onclick="login(event)">PROCEED</button>
+  <div id="extraFields" style="display:none;">
+    <input type="password" id="confirm" placeholder="Confirm Password">
+  </div>
+
+  <button id="mainBtn" onclick="submit(event)">PROCEED</button>
 
   <small>Black / White Secure Access</small>
 </div>
 
 <script>
-// fake login logic placeholder
-function login(e) {
+let isSignup = false;
+
+function toggleMode() {
+  isSignup = !isSignup;
+
+  document.getElementById("title").innerText = isSignup ? "SIGN UP" : "LOGIN";
+  document.getElementById("modeText").innerText = isSignup ? "Login" : "Sign Up";
+  document.getElementById("mainBtn").innerText = isSignup ? "CREATE ACCOUNT" : "PROCEED";
+
+  document.getElementById("extraFields").style.display = isSignup ? "block" : "none";
+}
+
+function submit(e) {
   const code = document.getElementById("code").value;
   const pass = document.getElementById("pass").value;
 
@@ -154,12 +183,22 @@ function login(e) {
     return;
   }
 
-  // demo redirect (change later)
-  alert("Accessing system...");
+  if (isSignup) {
+    const confirm = document.getElementById("confirm").value;
+    if (pass !== confirm) {
+      alert("Passwords do not match");
+      return;
+    }
+
+    alert("Account created!");
+  } else {
+    alert("Logging in...");
+  }
+
   window.location.href = "index.html";
 }
 
-// ripple effect
+/* ripple effect */
 document.querySelector("button").addEventListener("click", function (e) {
   const circle = document.createElement("span");
   const rect = this.getBoundingClientRect();
