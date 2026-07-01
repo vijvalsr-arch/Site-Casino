@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login</title>
+<title>Access</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
@@ -20,17 +20,16 @@ body {
   background: #000;
   color: #fff;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   overflow: hidden;
 }
 
-/* moving strip light */
+/* background light strips */
 body::before {
   content: "";
   position: absolute;
-  width: 200%;
-  height: 200%;
+  inset: 0;
   background: repeating-linear-gradient(
     90deg,
     #111 0px,
@@ -38,8 +37,8 @@ body::before {
     #000 40px,
     #000 80px
   );
-  animation: move 12s linear infinite;
   opacity: 0.35;
+  animation: move 14s linear infinite;
 }
 
 @keyframes move {
@@ -49,35 +48,42 @@ body::before {
 
 .container {
   position: relative;
-  z-index: 2;
-  width: 340px;
+  width: 360px;
   padding: 30px;
   border: 1px solid #fff;
   background: rgba(0,0,0,0.75);
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(10px);
   text-align: center;
-  animation: fadeIn 0.8s ease;
+  z-index: 2;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(15px); }
-  to { opacity: 1; transform: translateY(0); }
+/* tabs */
+.tabs {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  border: 1px solid #fff;
+}
+
+.tab {
+  flex: 1;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  opacity: 0.6;
+  transition: 0.3s;
+}
+
+.tab.active {
+  background: #fff;
+  color: #000;
+  opacity: 1;
 }
 
 h1 {
+  margin-bottom: 15px;
   letter-spacing: 2px;
-  margin-bottom: 10px;
-}
-
-.toggle {
-  font-size: 12px;
-  margin-bottom: 20px;
-  cursor: pointer;
-  opacity: 0.7;
-}
-
-.toggle:hover {
-  opacity: 1;
+  font-size: 20px;
 }
 
 input {
@@ -105,8 +111,6 @@ button {
   color: #000;
   font-weight: 700;
   cursor: pointer;
-  position: relative;
-  overflow: hidden;
   transition: 0.3s;
 }
 
@@ -115,25 +119,9 @@ button:hover {
   color: #fff;
 }
 
-/* ripple */
-.ripple {
-  position: absolute;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.6);
-  transform: scale(0);
-  animation: ripple 600ms linear;
-}
-
-@keyframes ripple {
-  to {
-    transform: scale(4);
-    opacity: 0;
-  }
-}
-
 small {
   display: block;
-  margin-top: 12px;
+  margin-top: 10px;
   opacity: 0.6;
   font-size: 11px;
 }
@@ -143,74 +131,70 @@ small {
 <body>
 
 <div class="container">
+
+  <div class="tabs">
+    <div class="tab active" id="loginTab" onclick="switchTab('login')">LOGIN</div>
+    <div class="tab" id="signupTab" onclick="switchTab('signup')">SIGN UP</div>
+  </div>
+
   <h1 id="title">LOGIN</h1>
 
-  <div class="toggle" onclick="toggleMode()">
-    Switch to <span id="modeText">Sign Up</span>
+  <!-- LOGIN FORM -->
+  <div id="loginForm">
+    <input type="text" id="loginCode" placeholder="Enter Code">
+    <input type="password" id="loginPass" placeholder="Password">
+    <button onclick="login()">PROCEED</button>
   </div>
 
-  <input type="text" id="code" placeholder="Enter Code">
-  <input type="password" id="pass" placeholder="Password">
-
-  <div id="extraFields" style="display:none;">
-    <input type="password" id="confirm" placeholder="Confirm Password">
+  <!-- SIGNUP FORM -->
+  <div id="signupForm" style="display:none;">
+    <input type="text" id="signupCode" placeholder="Create Code">
+    <input type="password" id="signupPass" placeholder="Password">
+    <input type="password" id="signupConfirm" placeholder="Confirm Password">
+    <button onclick="signup()">CREATE ACCOUNT</button>
   </div>
-
-  <button id="mainBtn" onclick="submit(event)">PROCEED</button>
 
   <small>Black / White Secure Access</small>
+
 </div>
 
 <script>
-let isSignup = false;
+let mode = "login";
 
-function toggleMode() {
-  isSignup = !isSignup;
+function switchTab(tab) {
+  mode = tab;
 
-  document.getElementById("title").innerText = isSignup ? "SIGN UP" : "LOGIN";
-  document.getElementById("modeText").innerText = isSignup ? "Login" : "Sign Up";
-  document.getElementById("mainBtn").innerText = isSignup ? "CREATE ACCOUNT" : "PROCEED";
+  document.getElementById("loginTab").classList.toggle("active", tab === "login");
+  document.getElementById("signupTab").classList.toggle("active", tab === "signup");
 
-  document.getElementById("extraFields").style.display = isSignup ? "block" : "none";
+  document.getElementById("loginForm").style.display = tab === "login" ? "block" : "none";
+  document.getElementById("signupForm").style.display = tab === "signup" ? "block" : "none";
+
+  document.getElementById("title").innerText = tab.toUpperCase();
 }
 
-function submit(e) {
-  const code = document.getElementById("code").value;
-  const pass = document.getElementById("pass").value;
+function login() {
+  const code = document.getElementById("loginCode").value;
+  const pass = document.getElementById("loginPass").value;
 
-  if (!code || !pass) {
-    alert("Fill in all fields");
-    return;
-  }
+  if (!code || !pass) return alert("Fill all fields");
 
-  if (isSignup) {
-    const confirm = document.getElementById("confirm").value;
-    if (pass !== confirm) {
-      alert("Passwords do not match");
-      return;
-    }
-
-    alert("Account created!");
-  } else {
-    alert("Logging in...");
-  }
-
+  alert("Logging in...");
   window.location.href = "index.html";
 }
 
-/* ripple effect */
-document.querySelector("button").addEventListener("click", function (e) {
-  const circle = document.createElement("span");
-  const rect = this.getBoundingClientRect();
+function signup() {
+  const code = document.getElementById("signupCode").value;
+  const pass = document.getElementById("signupPass").value;
+  const confirm = document.getElementById("signupConfirm").value;
 
-  circle.classList.add("ripple");
-  circle.style.left = (e.clientX - rect.left) + "px";
-  circle.style.top = (e.clientY - rect.top) + "px";
+  if (!code || !pass || !confirm) return alert("Fill all fields");
 
-  this.appendChild(circle);
+  if (pass !== confirm) return alert("Passwords do not match");
 
-  setTimeout(() => circle.remove(), 600);
-});
+  alert("Account created!");
+  window.location.href = "index.html";
+}
 </script>
 
 </body>
