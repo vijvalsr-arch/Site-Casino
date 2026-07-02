@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Site Login</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
+body{height:100vh;background:#000;color:#fff;display:flex;justify-content:center;align-items:center;overflow:hidden}
+body:before{content:"";position:fixed;inset:-50%;background:repeating-linear-gradient(90deg,#111 0 40px,#000 40px 80px);animation:move 10s linear infinite;opacity:.35}
+@keyframes move{to{transform:translateX(-80px)}}
+.box{position:relative;z-index:2;width:360px;background:rgba(0,0,0,.75);border:1px solid #fff;padding:28px}
+.tabs{display:flex;border:1px solid #fff;margin-bottom:18px}.tab{flex:1;padding:10px;background:#000;color:#fff;border:none;cursor:pointer}.active{background:#fff;color:#000}
+h2{text-align:center;margin-bottom:15px}
+input{width:100%;padding:12px;margin:8px 0;background:transparent;border:1px solid #fff;color:#fff;text-transform:uppercase}
+.req{border:1px solid #fff;padding:10px;font-size:13px;line-height:1.7;margin:10px 0}
+.ok{color:#7cff8b}.bad{color:#ff7070}
+button.go{width:100%;padding:12px;background:#fff;color:#000;border:1px solid #fff;font-weight:700;cursor:pointer}
+.hidden{display:none}
+small{display:block;text-align:center;margin-top:12px;color:#aaa}
+</style></head><body>
+<div class="box">
+<div class="tabs"><button id="loginTab" class="tab active">LOGIN</button><button id="signupTab" class="tab">SIGN UP</button></div>
+<div id="loginForm">
+<h2>LOGIN</h2><input id="loginCode" maxlength="4" placeholder="Site Code"><button class="go" onclick="login()">PROCEED</button>
+</div>
+<div id="signupForm" class="hidden">
+<h2>SIGN UP</h2><input id="signupCode" maxlength="4" placeholder="Choose Site Code">
+<div class="req">
+<div id=l1 class=bad>✖ 2 Letters</div>
+<div id=l2 class=bad>✖ 1 Number</div>
+<div id=l3 class=bad>✖ 1 Special Character</div>
+<div id=l4 class=bad>✖ Exactly 4 Characters</div>
+</div>
+<button class="go" onclick="signup()">CREATE ACCOUNT</button>
+</div>
+<small>Black / White Secure Access</small></div>
+<script>
+const lt=loginTab,st=signupTab,lf=loginForm,sf=signupForm;
+lt.onclick=()=>{lt.classList.add('active');st.classList.remove('active');lf.classList.remove('hidden');sf.classList.add('hidden')}
+st.onclick=()=>{st.classList.add('active');lt.classList.remove('active');sf.classList.remove('hidden');lf.classList.add('hidden')}
+signupCode.oninput=()=>{
+let v=signupCode.value.toUpperCase(),L=(v.match(/[A-Z]/g)||[]).length,N=(v.match(/[0-9]/g)||[]).length,S=(v.match(/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>/?]/g)||[]).length;
+[[l1,L==2],[l2,N==1],[l3,S==1],[l4,v.length==4]].forEach(([e,b])=>{e.className=b?'ok':'bad';e.textContent=(b?'✔ ':'✖ ')+e.textContent.slice(2)})
+}
+const re=/^(?=(?:.*[A-Z]){2})(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>/?])[A-Z\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>/?]{4}$/;
+function login(){if(!re.test(loginCode.value.toUpperCase()))return alert('Invalid Site Code');location='hub.html'}
+function signup(){if(!re.test(signupCode.value.toUpperCase()))return alert('Your code needs exactly 2 letters, 1 number, 1 special character, and 4 characters total.');location='hub.html'}
+</script></body></html>
