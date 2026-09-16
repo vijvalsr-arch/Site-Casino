@@ -54,7 +54,7 @@
 <script>
 (() => {
 const KEY='freeism_bank_v3';
-const stocks=['NovaX','MarketZ','Freeism Labs','Banana Inc.','Aether Stocks','Lvidia','Zion Corp.','ButterNet','NorthStar','Eclipse','Crown Data','Vertex','Iron Pulse','Cloud Forge','Lumen','Prime Harbor','ZeroPoint','Atlas Core','MonoWave','NightLine'];
+const stocks=['NovaX','MarketZ','Freeism Labs','Banana Inc.','Aether Stocks','Lvidia','Zion Corp.','ButterNet','Trust Inc.','Eclipse','Vertex','Lumen','MonoWave'];
 const defaultState={green:15,blue:0,honors:0,workSessions:0,workReadyAt:0,lastTaxPaid:null,taxMissedWeeks:0,history:[],shares:{},stockPrices:{},marketMultiplier:1,minedToday:0,mineDate:new Date().toDateString(),mathCorrect:0,perfectStreak:0,mathEarned:0};
 let state=load(); let modalAction=null; let cooldownTimer=null;
 function load(){try{return {...defaultState,...JSON.parse(localStorage.getItem(KEY)||'{}'),shares:{...defaultState.shares,...(JSON.parse(localStorage.getItem(KEY)||'{}').shares||{})}}}catch{return {...defaultState}}}
